@@ -9,7 +9,9 @@
    
 }
 
-
+function draw(){
+  
+}
   externals.render = function () {
     let app = $('#app').empty();
 
