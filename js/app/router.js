@@ -16,7 +16,7 @@ const routes = {
   }
   };
 
-const defaultRoute = "#home";
+const defaultRoute = "home";
 
 const hashCheck = () => {
   var routeName = Object.keys(routes).find(function (name) {
