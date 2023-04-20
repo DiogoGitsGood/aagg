@@ -1,5 +1,5 @@
 
-let key = "RGAPI-8c143b88-d29a-468d-b1bd-19f063eabac5";
+let key = "";
 let players = [];
 const rio = "https://euw1.api.riotgames.com";
 
