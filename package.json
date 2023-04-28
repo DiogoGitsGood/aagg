@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "nano": "^10.1.2",
+    "nanoajax": "^0.4.3"
+  }
+}

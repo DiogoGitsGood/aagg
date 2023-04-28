@@ -1,10 +1,17 @@
-import homeview from "../views/home-view.js";
+import homeView from "../views/home-view.js";
+import newAccountController from "./newAccount-controller.js";
 
-const externals= {};
+const externals = {};
 
-externals.start = function(){
-   //location.reload();
-    homeview.render();
+function createAccount() {
+  console.log("create account");
+  window.location.hash ="#newAccount";
 }
+
+externals.start = function () {
+  homeView.render();
+
+  $('#create-account-btn').on('click', createAccount);
+};
 
 export default externals;
