@@ -7,3 +7,17 @@
     border: 2px solid #4CAF50;
 }
 
+
+  
+
+  
+  .tribe-image img {
+    max-width: 100px;
+
+    height: auto;
+  }
+  
+  .select-button {
+    margin-top: 10px;
+  }
+  
