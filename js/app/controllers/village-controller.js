@@ -1,12 +1,13 @@
-import playerView from "../views/player-view.js";
-import playerService from "../services/player-service.js";
+import villageView from "../views/village-view.js";
+import newAccountService from "../services/newAccount-service.js";
 
 const externals = {};
 
-externals.start = function(sumname){
-playerService.getPPUID(sumname, function(){
-playerView.render() 
-});}
+externals.start = function(){
+
+villageView.render(newAccountService.getUserFromLocalStorage());
+
+}
 
 
 

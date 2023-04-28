@@ -3,7 +3,7 @@ const externals = {};
 
 
 function renderSidebar(app) {
-  console.log("render sidebar");
+ 
  $(`h1`).empty();
   $(`h1`).append(" Cool Browser Game Landing Page");
   app.append(`
@@ -19,15 +19,13 @@ function renderSidebar(app) {
   function displayMotivationalPhrase(app) {
     const phraseArray = Object.values(phrases);
     const phrase = phraseArray[Math.floor(Math.random() * phraseArray.length)];
-    
-    console.log(phrase)
     app.append(`<p>"`+ phrase +`"</p>`);
   }
   
 
 
 function renderCenter(app) {
-  console.log("render center");
+  
   app.append(`
     <div class="center">
       <img src="img/landing.jpg" style="margin-top:10px" alt="Cool Browser Game">

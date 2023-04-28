@@ -55,23 +55,57 @@ const externals = {};
       });
   };
 
+  externals.authenticateUser = async function(username, password) {
+    try {
+      const configResponse = await fetch('../../../config.json');
+      const config = await configResponse.json();
 
- externals.validateUsernameAndPassword = async function(username, password) {
-  try {
-    const response = await fetch(`http://localhost:5984/coolgame/_design/coolgame/_view/by_username_password?key=["${username}", "${password}"]`);
-    const data = await response.json();
-
-    if (data.rows.length > 0) {
-      const user = data.rows[0].value;
-      console.log(`Logged in as ${user.username}!`);
-    } else {
-      console.error(`Invalid username or password!`);
+      const response = await fetch(`http://localhost:5984/coolgame/_design/by_username_password/_view/by_username_password?key=["${username}", "${password}"]&include_docs=true`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Basic ' + btoa(`${config.couchdb.username}:${config.couchdb.password}`)
+        }
+      });
+      const data = await response.json();
+      const user = {
+        username: data.rows[0].value.username,
+        tribe: data.rows[0].value.tribe,
+        village: data.rows[0].value.village
+      };
+     
+      
+      if (data.rows.length > 0) {
+       saveUserToLocalStorage(user); 
+       window.location.hash ="#village";
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      console.error(`Error logging in: ${error}`);
+      return false;
     }
-  } catch (error) {
-    console.error(`Error logging in: ${error}`);
   }
+    
+
+
+function saveUserToLocalStorage(data) {
+  localStorage.setItem('user', JSON.stringify(data));
 }
+
+externals.getUserFromLocalStorage = function() {
+  const user = JSON.parse(localStorage.getItem('user'));
  
+  if (!user) {
+    return null;
+  }
+
+  return user;
+}
 
 
+
+externals.getPlayer = function (){
+  return user;
+}
 export default externals;

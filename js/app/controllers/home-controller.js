@@ -13,7 +13,7 @@ function login() {
   const username = $("#username-input").val();
   const password = $("#password-input").val();
 
-  newAccountService.validateUsernameAndPassword(username, password)
+  newAccountService.authenticateUser(username, password)
     .then((player) => {
       sessionStorage.setItem("player", JSON.stringify(player));
       window.location.hash = "#village";

@@ -1,5 +1,6 @@
 import homeController from "./controllers/home-controller.js";
-import newAccountController from "./controllers/newAccount-controller.js"
+import newAccountController from "./controllers/newAccount-controller.js";
+import villageController from "./controllers/village-controller.js";
 /**
  * Router Module
  */
@@ -9,10 +10,14 @@ const routes = {
   home:{
     hash:"#home",
     controller:homeController
-  }
-  ,player:{
+  },
+  player:{
     hash:"#newAccount",
     controller:newAccountController
+  },
+  village:{
+    hash:"#village",
+    controller:villageController
   }
   };
 
