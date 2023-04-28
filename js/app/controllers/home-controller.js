@@ -1,5 +1,5 @@
 import homeView from "../views/home-view.js";
-import newAccountController from "./newAccount-controller.js";
+
 
 const externals = {};
 
