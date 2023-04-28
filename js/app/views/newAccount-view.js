@@ -12,8 +12,6 @@ function renderNewAccountForm(app) {
     const email = $('#email').val();
     const tribe = $('input[name=tribe]:checked').val();
 
-    newAccountService.createAccount(username, password, email, tribe);
-
     // Redirect to home page
     window.location.hash = '#/';
   });

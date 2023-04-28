@@ -14,12 +14,13 @@ externals.start = function() {
     const password = $('#password').val();
     const email = $('#email').val();
     const tribe = $('#tribe').val();
-    newAccountService.createAccount(username, password);
+    newAccountService.createAccount(username, password, email, tribe);
 
     // Redirect to home page
     alert("yay");
     window.location.hash = '#/';
   });
 };
+
 
 export default externals;
