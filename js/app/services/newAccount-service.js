@@ -1,5 +1,8 @@
-const NewAccountService = function() {
-  const createAccount = function(username, password, email, tribe) {
+const externals = {};
+
+
+
+  externals.createAccount = function(username, password, email, tribe) {
     fetch('../../../config.json')
       .then(response => response.json())
       .then(config => {
@@ -38,9 +41,7 @@ const NewAccountService = function() {
       });
   };
   
-  return {
-    createAccount: createAccount
-  };
-};
+ 
 
-export default new NewAccountService();
+
+export default externals;
