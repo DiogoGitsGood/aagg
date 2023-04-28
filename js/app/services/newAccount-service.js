@@ -23,13 +23,10 @@ const externals = {};
         lumbers: 4,
         rockMines: 3,
         goldMines: 3,
-      },
-    },
-        };
+      },},};
         
-        const postData = JSON.stringify(user);
-        
-        const options = {
+      const postData = JSON.stringify(user);
+      const options = {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -55,6 +52,8 @@ const externals = {};
       });
   };
 
+
+
   externals.authenticateUser = async function(username, password) {
     try {
       const configResponse = await fetch('../../../config.json');
@@ -75,9 +74,8 @@ const externals = {};
      
       
       if (data.rows.length > 0) {
-       saveUserToLocalStorage(user); 
-       window.location.hash ="#village";
-        return true;
+     saveUserToLocalStorage(user);
+      return true;
       } else {
         return false;
       }
@@ -87,14 +85,66 @@ const externals = {};
     }
   }
     
+  externals.getAll = async function(){
+    try {
+      const configResponse = await fetch('../../../config.json');
+      const config = await configResponse.json();
+  
+      const response = await fetch(`http://localhost:5984/coolgame/_all_docs?include_docs=true`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Basic ' + btoa(`${config.couchdb.username}:${config.couchdb.password}`)
+        }
+      });
+      const data = await response.json();
+      const users = data.rows
+        .filter(row => row.doc && row.doc.username !== undefined)
+        .map(row => ({
+          username: row.doc.username,
+          tribe: row.doc.tribe,
+          village: row.doc.village
+        }));
+  
+      return users;
+    } catch (error) {
+      console.error(`Error getting all users: ${error}`);
+      return false;
+    }
+  }
+
+
+  externals.updateUser = async function(username, updatedData) {
+    const configResponse = await fetch('../../../config.json');
+    const config = await configResponse.json();
+  
+
+    const response = await fetch(`http://localhost:5984/coolgame/${username}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic ' + btoa(`${config.couchdb.username}:${config.couchdb.password}`)
+      },
+      body: JSON.stringify(updatedData)
+    });
+  
+    if (response.ok) {
+      console.log('User updated successfully.'+ username);
+      return true;
+    } else if (response.status === 409) {
+      console.log('Conflict detected, attempting to resolve.');
+      console.error('Failed to update user.');
+      return false;
+    }
+  };
+
 
 
 function saveUserToLocalStorage(data) {
-  localStorage.setItem('user', JSON.stringify(data));
+  sessionStorage.setItem('user', JSON.stringify(data));
 }
 
 externals.getUserFromLocalStorage = function() {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(sessionStorage.getItem('user'));
  
   if (!user) {
     return null;
@@ -103,6 +153,9 @@ externals.getUserFromLocalStorage = function() {
   return user;
 }
 
+externals.deleteUserFromLocalStorage = function() {
+  sessionStorage.removeItem("user");
+}
 
 
 externals.getPlayer = function (){

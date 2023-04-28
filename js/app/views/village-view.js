@@ -10,11 +10,7 @@ function renderSidebar(app, username) {
         <button id="logout-btn">Logout</button>
       </div>
     `);
-    
-  const backButton = $('#logout-btn').text('Back to Home');
-  backButton.on('click', function() {
-    window.location.hash = '#/';
-  });
+
   }
   
   function renderCenter(app, buildings, resources) {
@@ -49,7 +45,7 @@ function renderSidebar(app, username) {
       // Handle case when user is not logged in
       app.append(`
         <div class="center">
-          <p>Please login to access this page</p>
+          <p>Please login to access this page, or incase you tried to login, your shit was wrong lol</p>
         </div>
       `);
       return;

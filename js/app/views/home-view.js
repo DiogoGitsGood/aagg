@@ -9,7 +9,7 @@ function renderSidebar(app) {
   app.append(`
     <div class="sidebar">
       <button id="create-account-btn">Create Account</button>
-      <button id="login-btn">Login</button>
+     
       <button id="rules-btn">See Rules</button>
       <button id="leaderboard-btn">Check Leaderboard</button>
     </div>
