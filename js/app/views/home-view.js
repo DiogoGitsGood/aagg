@@ -32,6 +32,15 @@ function renderCenter(app) {
     <div class="center">
       <img src="img/landing.jpg" style="margin-top:10px" alt="Cool Browser Game">
       <p>Welcome to Cool Browser Games! Play now and become the ultimate champion!</p>
+   <form id="login-form">
+        <label for="username-input">Username:</label>
+        <input type="text" id="username-input" required>
+
+        <label for="password-input">Password:</label>
+        <input type="password" id="password-input" required>
+
+        <button type="submit">Login</button>
+      </form>
     </div>
   `);
 }

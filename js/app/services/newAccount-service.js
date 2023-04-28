@@ -10,7 +10,21 @@ const externals = {};
           username: username,
           password: password,
           email: email,
-          tribe: tribe
+          tribe, 
+    village: {
+      resources: {
+        wheat: 1000,
+        wood: 1000,
+        stone: 500,
+        gold: 500,
+      },
+      buildings: {
+        farms: 4,
+        lumbers: 4,
+        rockMines: 3,
+        goldMines: 3,
+      },
+    },
         };
         
         const postData = JSON.stringify(user);
@@ -40,7 +54,23 @@ const externals = {};
         console.error(`Error loading config: ${error}`);
       });
   };
-  
+
+
+ externals.validateUsernameAndPassword = async function(username, password) {
+  try {
+    const response = await fetch(`http://localhost:5984/coolgame/_design/coolgame/_view/by_username_password?key=["${username}", "${password}"]`);
+    const data = await response.json();
+
+    if (data.rows.length > 0) {
+      const user = data.rows[0].value;
+      console.log(`Logged in as ${user.username}!`);
+    } else {
+      console.error(`Invalid username or password!`);
+    }
+  } catch (error) {
+    console.error(`Error logging in: ${error}`);
+  }
+}
  
 
 
