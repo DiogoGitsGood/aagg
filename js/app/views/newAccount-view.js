@@ -22,7 +22,7 @@ function renderNewAccountForm(app) {
 
   const humansDescription = "Humans are a proud race of warriors who value strength and honor above all else. They are known for their exceptional swordsmanship and their powerful war cry.";
   const orcsDescription = "Orcs are a fierce and brutal race that lives for battle. They are known for their ferocity in combat and their ability to take on much larger opponents.";
-  const tribeSelection = $('<div>').addClass('tribe-selection').append(
+  const tribeSelection = $('<div>').addClass('tribe-selection').attr('id', 'tribe').append(
     $('<div>').addClass('tribe-description').text('Choose your tribe:'),
     $('<label>').append(
       $('<input>').attr('type', 'radio').attr('name', 'tribe').val('humans').prop('checked', true),

@@ -5,6 +5,7 @@ import newAccountService from "../services/newAccount-service.js";
 const externals = {};
 
 externals.start = function() {
+
   newAccountView.render();
 
   $('form').submit(function(event) {
@@ -13,7 +14,7 @@ externals.start = function() {
     const username = $('#username').val();
     const password = $('#password').val();
     const email = $('#email').val();
-    const tribe = $('#tribe').val();
+    const tribe= $('input[name=tribe]:checked').val();
     newAccountService.createAccount(username, password, email, tribe);
 
     // Redirect to home page

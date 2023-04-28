@@ -5,7 +5,7 @@ const externals = {};
 
 externals.start = function(sumname){
 playerService.getPPUID(sumname, function(){
-   playerView.render() 
+playerView.render() 
 });}
 
 
