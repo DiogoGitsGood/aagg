@@ -1,12 +1,11 @@
-import newAccountService from "./newAccount-service.js";
+import dataService from "./data-service.js";
 
 let externals = {};
-const BUILDING_INTERVAL_MS = 30000;
-
 const BUILDING_PRODUCTION_RATE = 30;
 
+//this is ok
 externals.updateResourcesForUser = async function() {
-    const users = await newAccountService.getAll();
+    const users = await dataService.getAll();
  
     for (let i = 0; i < users.length; i++) {
  
@@ -30,11 +29,46 @@ externals.updateResourcesForUser = async function() {
       village.resources.gold += goldProduction;
   
       // Update village on database
-      await newAccountService.updateUser(user.username, { village });
+      await dataService.updateUser(user.username, { village });
     }   
   }
   
-
+ externals.updateVillageResources = function() {
+    const now = new Date();
+    const village = JSON.parse(localStorage.getItem('user'));
+    console.log(village);
+    // Calculate the time elapsed since the last update
+    const lastUpdateTime = new Date(village.lastUpdateTime);
+    const elapsedMs = now.getTime() - lastUpdateTime.getTime();
+    const elapsedSeconds = elapsedMs / 1000;
+    
+    // Calculate the amount of resources produced by each building
+    const productionRates = {
+      farms: 10,
+      lumbers: 5,
+      rockMines: 3,
+      goldMines: 2,
+    };
+    const resourcesProduced = {
+      wheat: village.buildings.farms * productionRates.farms * elapsedSeconds,
+      wood: village.buildings.lumbers * productionRates.lumbers * elapsedSeconds,
+      stone: village.buildings.rockMines * productionRates.rockMines * elapsedSeconds,
+      gold: village.buildings.goldMines * productionRates.goldMines * elapsedSeconds,
+    };
+    
+    // Update the village resources
+    for (const resource in resourcesProduced) {
+      village.resources[resource] += resourcesProduced[resource];
+    }
+    
+    // Update the last update time
+    village.lastUpdateTime = now.toISOString();
+    
+    // Save the updated village object to local storage
+    localStorage.setItem('village', JSON.stringify(village));
+    dataService.updateUser(localStorage.getItem('user').username, localStorage.getItem('user') )
+  }
+  
 
 
 export default externals;

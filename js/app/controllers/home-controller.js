@@ -1,5 +1,5 @@
 import homeView from "../views/home-view.js";
-import newAccountService from "../services/newAccount-service.js";
+import authService from "../services/auth-service.js";
 
 const externals = {};
 
@@ -13,7 +13,7 @@ function login() {
   const username = $("#username-input").val();
   const password = $("#password-input").val();
 
-  newAccountService.authenticateUser(username, password)
+  authService.authenticateUser(username, password)
     .then((player) => {
       sessionStorage.setItem("player", JSON.stringify(player));
       window.location.hash = "#village";

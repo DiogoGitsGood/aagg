@@ -1,16 +1,20 @@
 import villageView from "../views/village-view.js";
-import newAccountService from "../services/newAccount-service.js";
+import localService from "../services/local-service.js"
+import gameService from "../services/game-service.js"
 
 const externals = {};
 
 externals.start = function(){
+//surprisingly ok
+villageView.render(localService.localLoad('user'));
 
-villageView.render(newAccountService.getUserFromLocalStorage());
+//setInterval(gameService.updateVillageResources, 10000); // 10000 milliseconds = 10 seconds
+
 $('#logout-btn').on('click', logout);
 }
 
 function logout() {
-    newAccountService.deleteUserFromLocalStorage();
+    localService.localDelete('user');
     window.location.hash = '#/';
 }
 

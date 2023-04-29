@@ -15,6 +15,7 @@ function renderSidebar(app, username) {
   
   function renderCenter(app, buildings, resources) {
     let buildingsHTML = '';
+    console.log(buildings);
     for (let building in buildings) {
       buildingsHTML += `<li>${building}: ${buildings[building]}</li>`;
     }
