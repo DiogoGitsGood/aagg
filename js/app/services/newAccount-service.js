@@ -21,19 +21,18 @@ const externals = {};
       buildings: {
         farms: {
           level: 1,
-          productionRate: 10 // produce 10 wheat per hour
+          productionRate: 10 
         },
         lumbers: {
           level: 1,
-          productionRate: 5 // produce 5 wood per hour
+          productionRate: 5
         },
         rockMines: {
           level: 1,
-          productionRate: 2 // produce 2 stone per hour
+          productionRate: 2 
         },
         goldMines: {
           level: 1,
-          productionRate: 1 // produce 1 gold per hour
         }},lastUpdateTime: new Date()}};
       
       const postData = JSON.stringify(user);

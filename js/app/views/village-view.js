@@ -7,6 +7,8 @@ function renderSidebar(app, username) {
     app.append(`
       <div class="sidebar">
         <p>Player: ${username}</p>
+        <button id="up">Update</button>
+     
         <button id="logout-btn">Logout</button>
       </div>
     `);
@@ -38,10 +40,11 @@ function renderSidebar(app, username) {
   
   externals.render = function (userin) {
 
-    console.log(userin)
+    
     let app = $('#app').empty();
   
-  
+
+    
     if (!userin) {
       // Handle case when user is not logged in
       app.append(`

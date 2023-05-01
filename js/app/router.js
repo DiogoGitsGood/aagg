@@ -49,7 +49,8 @@ externals.start = () => {
   hashCheck();
 
   $(window).on("hashchange", function () {
-    console.log("Hash has changed.");
+ 
+   console.log("Hash has changed.");
     hashCheck();
   });
 };

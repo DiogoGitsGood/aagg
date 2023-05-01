@@ -1,4 +1,3 @@
-import localService from "./local-service.js";
 
 const externals = {};
 
@@ -24,7 +23,7 @@ externals.authenticateUser = async function(username, password) {
      
       
       if (data.rows.length > 0) {
-        localService.localSave('user', user);
+        localStorage.setItem('user', user);
         return true;
       } else {
         return false;
@@ -34,6 +33,5 @@ externals.authenticateUser = async function(username, password) {
       return false;
     }
   }
-  "Help me create a couchDB database, and some methods to get and update users. users should have usernames, password,  email, and tribe. the tribe object should have a village. the villages should have resources, that contain 1000 woobuildings, that contain  4 lumbers, 4 farms, 4 stoneMine, 4 goldMine."
-
+ 
   export default externals;

@@ -15,7 +15,7 @@ function login() {
 
   authService.authenticateUser(username, password)
     .then((player) => {
-      sessionStorage.setItem("player", JSON.stringify(player));
+      localStorage.setItem("player", JSON.stringify(player));
       window.location.hash = "#village";
     })
     .catch((error) => {
